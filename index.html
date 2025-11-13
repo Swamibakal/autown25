@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AUTOWN'25 | AACE</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #000814;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.car {
+  position: fixed;
+  width: 45px;
+  height: 24px;
+  background: url('https://i.imgur.com/tQfGq92.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.55; /* brighter */
+  filter: drop-shadow(0 0 6px cyan);
+  animation: drive 14s linear infinite;
+  z-index: -5;
+}
+
+.car:nth-child(1) { top: 20%; animation-delay: 0s; }
+.car:nth-child(2) { top: 50%; animation-delay: 3s; }
+.car:nth-child(3) { top: 75%; animation-delay: 6s; }
+
+@keyframes drive {
+  from { left: -120px; transform: scale(1); }
+  to   { left: 110%; transform: scale(1.1); }
+}
+
+.ai-node {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: cyan;
+  border-radius: 50%;
+  opacity: 0.5;
+  z-index: -6;
+  box-shadow: 0 0 10px cyan;
+  animation: floatNode 6s ease-in-out infinite;
+}
+
+.ai-node:nth-child(4) { top: 25%; left: 30%; animation-delay: 0s; }
+.ai-node:nth-child(5) { top: 45%; left: 60%; animation-delay: 1s; }
+.ai-node:nth-child(6) { top: 70%; left: 40%; animation-delay: 2s; }
+
+@keyframes floatNode {
+  0%, 100% { transform: translateY(0px); opacity: 0.4; }
+  50%      { transform: translateY(-20px); opacity: 0.8; }
+}
+
+.cube {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  background: rgba(0,255,255,0.3);
+  border: 2px solid rgba(0,255,255,0.6);
+  border-radius: 8px;
+  transform-style: preserve-3d;
+  animation: rotateCube 8s linear infinite, floatCube 6s ease-in-out infinite;
+  z-index: -7;
+  box-shadow: 0 0 12px cyan;
+}
+
+.cube:nth-child(7) { top: 20%; left: 20%; }
+.cube:nth-child(8) { top: 55%; left: 75%; }
+.cube:nth-child(9) { top: 40%; left: 50%; }
+
+@keyframes rotateCube {
+  from { transform: rotateX(0deg) rotateY(0deg); }
+  to   { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+@keyframes floatCube {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-25px); }
+}
+
+.matrix {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  color: rgba(0,255,70,0.55); /* brighter neon green */
+  font-family: monospace;
+  font-size: 20px;
+  text-shadow: 0 0 8px #00ff41;
+  overflow: hidden;
+  white-space: pre;
+  animation: matrixRain 8s linear infinite;
+  z-index: -10;
+}
+
+@keyframes matrixRain {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100%); }
+}
+
+.spark {
+  position: fixed;
+  width: 4px;
+  height: 90px;
+  background: rgba(0,255,255,0.85);
+  filter: blur(1px);
+  border-radius: 5px;
+  animation: sparkMove 4s linear infinite;
+  z-index: -8;
+  box-shadow: 0 0 15px #00eaff;
+}
+
+.spark:nth-child(10) { top: 10%; left: 30%; }
+.spark:nth-child(11) { top: 50%; left: 80%; }
+.spark:nth-child(12) { top: 70%; left: 15%; }
+
+@keyframes sparkMove {
+  from { transform: translate(-40px, -40px) rotate(35deg); opacity: 1; }
+  to   { transform: translate(300px, 300px) rotate(35deg); opacity: 0; }
+}
+
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
+  background-size: 200% 200%;
+  animation: gradientMove 10s ease infinite;
+  z-index: -1;
+}
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00e5ff;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: #00e5ff;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px 40px 20px;
+      background: rgba(0, 0, 0, 0.3);
+      margin-top: 50px;
+    }
+
+    .logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin: 10px 0;
+      letter-spacing: 2px;
+    }
+
+    .tagline {
+      font-size: 20px;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+    section {
+      padding: 50px 10%;
+      background: rgba(0,0,0,0.25);
+      margin: 20px 5%;
+      border-radius: 16px;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #fff;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    ul, p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+.schedule-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.schedule-day {
+  flex: 1;
+  min-width: 350px;
+}
+
+.schedule-day h3 {
+  text-align: center;
+  color: #00e5ff;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Forces equal column widths */
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #fff;
+  padding: 12px;
+  text-align: left;
+  width: 50%; /* Make both columns same width */
+}
+
+.schedule-table th:first-child,
+.schedule-table td:first-child {
+  text-align: center;
+  width: 40%; /* Adjust width for 'Time' */
+}
+
+.schedule-table th:last-child,
+.schedule-table td:last-child {
+  width: 60%; /* Adjust width for 'Session' */
+}
+
+    .img-box {
+      width: 200px;
+      height: 120px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .img-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,255,0.6);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      font-size: 16px;
+      margin-top: 40px;
+    }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: rgba(255,255,255,0.15);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #00e5ff;
+  transition: 0.3s;
+}
+
+.dropdown-btn:hover {
+  background: rgba(0,255,255,0.25);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  min-width: 250px;
+  border-radius: 8px;
+  padding: 10px 0;
+  z-index: 20;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.dropdown-content a:hover {
+  background: rgba(0,255,255,0.18);
+  color: #00e5ff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+#schedule .slot {
+    padding: 16px;
+    margin: 12px 0;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(0,255,255,0.2);
+    backdrop-filter: blur(4px);
+  }
+  .slider-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 20px 0;
+  border-radius: 14px;
+}
+
+.slider {
+  display: flex;
+  width: max-content;
+  animation: slide 18s linear infinite;
+}
+
+.slider img {
+  width: 480px;
+  height: 300px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,255,255,0.4);
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+  </style>
+</head>
+<body>
+  <body>
+
+
+  <div class="car"></div>
+  <div class="car"></div>
+  <div class="car"></div>
+
+  <div class="ai-node"></div>
+  <div class="ai-node"></div>
+  <div class="ai-node"></div>
+
+
+  <div class="cube"></div>
+  <div class="cube"></div>
+  <div class="cube"></div>
+
+ 
+  <div class="matrix">
+    01010101010101010<br>
+    11001010101100101<br>
+    10101111001001010<br>
+    01001101011010110<br>
+    11000101010111001<br>
+  </div>
+
+  <!-- EV ELECTRIC SPARKS -->
+  <div class="spark"></div>
+  <div class="spark"></div>
+  <div class="spark"></div>
+<nav>
+  <a href="#heading">Home</a>
+  <a href="#vision">Vision</a>
+  <a href="#objectives">Objectives</a>
+  <a href="#about">About</a>
+  <a href="#events">Events</a>
+  <a href="#schedule">Schedule</a>
+  <a href="#Venue">Venue</a>
+
+</nav>
+
+<h4><img src= "C:\Users\HP\Desktop\autown\images\25.png"alt="AUTOWN Logo" class="logo" /align= left></h4>
+<h3><img src= "C:\Users\HP\Desktop\autown\images\wilp logo (2).jpeg"alt="Bits Logo" class="logo" /align= right></h3>
+
+<header>
+  <section id= heading> 
+  <h1 align= center>AUTOWN'25</h1>
+  <h2>AACE: Autonomous • AI • Cybersecurity • EV</h2>
+  <p class="tagline">Powering Innovation Towards a Smarter and Safer Automotive Future.</p>
+</section>
+</header>
+
+<section id="vision">
+  <h2>Vision</h2>
+  <p>To create a collaborative platform where academia, industry, and policymakers converge to discuss the transformative technologies shaping the mobility landscape — from autonomous driving and AI-enabled decision systems to cybersecurity and sustainable electric mobility.</p>
+</section>
+
+<section id="objectives">
+  <h2>Objectives</h2>
+  <ul>
+    <li>Advance knowledge and collaboration in autonomous vehicles, AI, cybersecurity, and electric mobility.</li>
+    <li>Explore integration of intelligence, connectivity, and security in next-gen vehicles.</li>
+    <li>Provide hands-on learning through workshops and interactive sessions.</li>
+  </ul>
+</section>
+
+<section id="about">
+  <h2>About the Event</h2>
+  <p>
+    AUTOWN’25 brings together academia, industry, and policymakers to explore 
+    sessions, and hands-on workshops, participants engage with AI, autonomy, 
+    transformative automotive technologies. Through expert talks, technical 
+    cybersecurity, and sustainable mobility tools and applications.
+  </p>
+  <div class="dropdown">
+    <div class="dropdown-btn">About WILP ▼</div>
+    <div class="dropdown-content">
+      <a href="https://bits-pilani-wilp.ac.in">Visit BITS Pilani WILP Website</a>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <h2>Events</h2>
+  <ul>
+    <li><strong>Talks:</strong> Expert lectures by industry personnel.</li>
+    <li><strong>Competitions:</strong> Project and poster presentations, Robo racing, Drone racing.</li>
+    <li><strong>Workshops:</strong> Cybersecurity and Autonomous Vehicles.</li>
+  </ul>
+
+  <div>
+    <!-- All images link to ONE Google Form -->
+    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\robo.png" alt="Robo Racing"></div>
+    </a>
+
+    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\drone.jpg" alt="Drone Racing"></div>
+    </a>
+
+    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\cybersecurity.jpeg" alt="Cybersecurity"></div>
+    </a>
+
+    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\autonmous.jpeg" alt="Autonomous Vehicles"></div>
+    </a>
+  </div>
+</section>
+
+<section id="schedule">
+  <h2>Schedule</h2>
+
+  <h3>Day 1 - 20.02.2026</h3>
+  
+  <div class="slot" style="background:#00e5ff33; border-left:6px solid #00e5ff;">
+    <strong>09:30 AM – 10:00 AM</strong><br>Inaugural
+  </div>
+  <div class="slot" style="background:#ff009933; border-left:6px solid #ff0099;">
+    <strong>10:00 AM – 10:40 AM</strong><br>Expert Talk 1
+  </div>
+  <div class="slot" style="background:#00ff9d33; border-left:6px solid #00ff9d;">
+    <strong>10:40 AM – 11:20 AM</strong><br>Expert Talk 2
+  </div>
+  <div class="slot" style="background:#ffcc0033; border-left:6px solid #ffcc00;">
+    <strong>11:20 AM – 11:40 AM</strong><br>Tea Break
+  </div>
+  <div class="slot" style="background:#00c3ff33; border-left:6px solid #00c3ff;">
+    <strong>11:40 AM – 12:20 PM</strong><br>Expert Talk 3
+  </div>
+  <div class="slot" style="background:#ff660033; border-left:6px solid #ff6600;">
+    <strong>12:20 PM – 01:00 PM</strong><br>Expert Talk 4
+  </div>
+  <div class="slot" style="background:#0099ff33; border-left:6px solid #0099ff;">
+    <strong>01:00 PM – 02:00 PM</strong><br>Lunch Break
+  </div>
+  <div class="slot" style="background:#9d00ff33; border-left:6px solid #9d00ff;">
+    <strong>02:00 PM – 04:00 PM</strong><br>Workshop 1
+  </div>
+  <div class="slot" style="background:#ffaa0033; border-left:6px solid #ffaa00;">
+    <strong>04:00 PM – 04:20 PM</strong><br>Tea Break
+  </div>
+  <div class="slot" style="background:#00ffcc33; border-left:6px solid #00ffcc;">
+    <strong>04:20 PM – 06:00 PM</strong><br>Project Presentation
+  </div>
+
+  <h3>Day 2 - 21.02.2026</h3>
+
+  <div class="slot" style="background:#00e5ff33; border-left:6px solid #00e5ff;">
+    <strong>09:30 AM – 09:45 AM</strong><br>Sponsor Slot 1
+  </div>
+  <div class="slot" style="background:#ff009933; border-left:6px solid #ff0099;">
+    <strong>09:45 AM – 10:00 AM</strong><br>Sponsor Slot 2
+  </div>
+  <div class="slot" style="background:#00ff9d33; border-left:6px solid #00ff9d;">
+    <strong>10:00 AM – 10:15 AM</strong><br>Sponsor Slot 3
+  </div>
+  <div class="slot" style="background:#ff660033; border-left:6px solid #ff6600;">
+    <strong>10:15 AM – 10:30 AM</strong><br>Sponsor Slot 4
+  </div>
+  <div class="slot" style="background:#ffcc0033; border-left:6px solid #ffcc00;">
+    <strong>10:30 AM – 10:45 AM</strong><br>Tea Break
+  </div>
+  <div class="slot" style="background:#0099ff33; border-left:6px solid #0099ff;">
+    <strong>10:45 AM – 01:00 PM</strong><br>Competitions (Robo race, Drone race, Project)
+  </div>
+  <div class="slot" style="background:#00c3ff33; border-left:6px solid #00c3ff;">
+    <strong>01:00 PM – 02:00 PM</strong><br>Lunch Break
+  </div>
+  <div class="slot" style="background:#9d00ff33; border-left:6px solid #9d00ff;">
+    <strong>02:00 PM – 04:00 PM</strong><br>Workshop 2
+  </div>
+  <div class="slot" style="background:#ffaa0033; border-left:6px solid #ffaa00;">
+    <strong>04:00 PM – 04:15 PM</strong><br>Tea Break
+  </div>
+  <div class="slot" style="background:#00ffcc33; border-left:6px solid #00ffcc;">
+    <strong>04:15 PM – 05:00 PM</strong><br>Valedictory & Prize Distribution
+  </div>
+</section>
+<section id="Sponsorship">
+  <h2>Sponsorship</h2>
+
+   <h3>We are excited to offer a great opportunity for sponsorship in our upcoming Autown'25 event. The various levels of sponsorship provide the sponsors with unparalleled opportunities to showcase and promote the products and services to a diverse audience of elite professionals from academia and industry.
+  <br>
+  <br>
+  Categories: Bronze            -75k<br>
+              Silver            -100k<br>
+              Gold              -200k<br>
+              Platinum          -300k<br>
+  <br><br>
+   For more please contact:<br>
+   Mr. Akhilesh Bhatkar<br> 
+   Mob:9420425893<br>
+   Email: akhilesh.bhatkar@wilp.bits-pilani.ac.in
+          autownsupport@wilp.bits-pilani.ac.in<br>
+
+   </h3>
+</section>
+<section id="gallery">
+  <h2>Photo Gallery</h2>
+
+  <div class="slider-container">
+    <div class="slider">
+      <img src="C:/Users/HP/Desktop/autown/gallery1.jpg" alt="Image 1">
+      <img src="C:/Users/HP/Desktop/autown/gallery2.jpg" alt="Image 2">
+      <img src="C:/Users/HP/Desktop/autown/gallery3.jpg" alt="Image 3">
+      <img src="C:/Users/HP/Desktop/autown/gallery4.jpg" alt="Image 4">
+    </div>
+  </div>
+</section>
+
+<section id="Venue">
+  <h2>Venue</h2>
+
+   <h3>BITS Pilani Hyderabad Campus. BITS Hyderabad Campus Shamirpeth Mandal 500078.</h3>
+
+</section>
+<footer>
+  © AUTOWN'25 AACE | Designed for the future of smart mobility|
+  Designed & Developed by: Swami Bakal| BITS PILANI WILP| For support: autownsupport@wilp.bits-pilani.ac.in.
+</footer>
+
+</body>
+</html>
