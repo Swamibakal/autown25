@@ -197,13 +197,7 @@ body::before {
       margin: 10px 0;
       letter-spacing: 2px;
     }
-   h6 {
-      font-size: 30px;
-      margin: 20px 0;
-      letter-spacing: 2px;
-      font-style: italics;
-      font family: sans-serif;
-    }
+
     .tagline {
       font-size: 20px;
       margin-top: 10px;
@@ -386,6 +380,56 @@ body::before {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+.sponsor-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.sponsor-box {
+  width: 200px;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+}
+
+.sponsor-box:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 20px rgba(0,255,255,0.6);
+}
+
+/* Colors for each tier */
+.bronze {
+  background: linear-gradient(135deg, #cd7f32, #b36a23);
+}
+
+.silver {
+  background: linear-gradient(135deg, #c0c0c0, #a8a8a8);
+}
+
+.gold {
+  background: linear-gradient(135deg, #ffd700, #e6c200);
+}
+
+.platinum {
+  background: linear-gradient(135deg, #e5e4e2, #cccccc);
+}
+
+.sponsor-price {
+  font-size: 16px;
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+
   </style>
 </head>
 <body>
@@ -429,12 +473,15 @@ body::before {
 
 </nav>
 
-<h4><img src= "images/25.png" alt="AUTOWN Logo" class="logo" /align= left></h4>
-<h3><img src= "images/wilp logo (2).jpeg" alt="Bits Logo" class="logo" /align= right></h3>
+<h4><img src= "C:\Users\HP\Desktop\autown\images\25.png"alt="AUTOWN Logo" class="logo" /align= left></h4>
+<h3><img src= "C:\Users\HP\Desktop\autown\images\wilp logo (2).jpeg"alt="Bits Logo" class="logo" /align= right></h3>
 
 <header>
-  <section id= heading> 
-  <h6 align= center>AUTOWN'25</h6>
+  <section id= heading> <h4>
+  <img src="C:\Users\HP\Desktop\autown\images\28.png"
+       alt="AUTOWN Logo"
+       style="width: 600px; height: 220px;"
+       align="center"></h4>
   <h2>AACE: Autonomous • AI • Cybersecurity • EV</h2>
   <p class="tagline">Powering Innovation Towards a Smarter and Safer Automotive Future.</p>
 </section>
@@ -480,24 +527,25 @@ body::before {
 
   <div>
     <!-- All images link to ONE Google Form -->
-    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
-      <div class="img-box"><img src= "images/robo.png" alt="Robo Racing"></div>
+    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\robo.png" alt="Robo Racing"></div>
     </a>
 
-    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
-      <div class="img-box"><img src= "images/drone.jpg" alt="Drone Racing"></div>
+    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\drone.jpg" alt="Drone Racing"></div>
     </a>
 
-    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
-      <div class="img-box"><img src= "images/cybersecurity.jpeg" alt="Cybersecurity"></div>
+    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\cybersecurity.jpeg" alt="Cybersecurity"></div>
     </a>
 
-    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
-      <div class="img-box"><img src= "images/autonmous.jpeg" alt="Autonomous Vehicles"></div>
+    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+      <div class="img-box"><img src="C:\Users\HP\Desktop\autown\images\autonmous.jpeg" alt="Autonomous Vehicles"></div>
     </a>
   </div>
-  <h2>Speakers</h2>
-  
+
+  <h2> Speakers</h2>
+  <p> Will be updated</p>
 </section>
 
 <section id="schedule">
@@ -568,35 +616,69 @@ body::before {
   <div class="slot" style="background:#00ffcc33; border-left:6px solid #00ffcc;">
     <strong>04:15 PM – 05:00 PM</strong><br>Valedictory & Prize Distribution
   </div>
+
 </section>
 <section id="Sponsorship">
   <h2>Sponsorship</h2>
 
-   <h3>We are excited to offer a great opportunity for sponsorship in our upcoming Autown'25 event. The various levels of sponsorship provide the sponsors with unparalleled opportunities to showcase and promote the products and services to a diverse audience of elite professionals from academia and industry.
-  <br>
-  <br>
-  Categories: Bronze            -75k<br>
-              Silver            -100k<br>
-              Gold              -200k<br>
-              Platinum          -300k<br>
-  <br><br>
-   For more please contact:<br>
-   Mr. Akhilesh Bhatkar<br> 
-   Mob:9420425893<br>
-   Email: akhilesh.bhatkar@wilp.bits-pilani.ac.in
-          autownsupport@wilp.bits-pilani.ac.in<br>
+  <h3>
+    We are excited to offer sponsorship opportunities for AUTOWN'25.  
+    Choose from the following categories:
+  </h3>
 
-   </h3>
+  <div class="sponsor-container">
+
+    <div class="sponsor-box bronze">
+      Bronze
+      <div class="sponsor-price">₹ 75,000</div>
+    </div>
+
+    <div class="sponsor-box silver">
+      Silver
+      <div class="sponsor-price">₹ 1,00,000</div>
+    </div>
+
+    <div class="sponsor-box gold">
+      Gold
+      <div class="sponsor-price">₹ 2,00,000</div>
+    </div>
+
+    <div class="sponsor-box platinum">
+      Platinum
+      <div class="sponsor-price">₹ 3,00,000</div>
+    </div>
+
+  </div>
+
+  <br><br>
+  <h3>
+    For more details, please contact:<br>
+    Mr. Akhilesh Bhatkar<br>
+    Mob: 9420425893<br>
+    Email: akhilesh.bhatkar@wilp.bits-pilani.ac.in,<br>
+    autownsupport@wilp.bits-pilani.ac.in
+  </h3>
 </section>
+
 <section id="gallery">
   <h2>Photo Gallery</h2>
 
   <div class="slider-container">
     <div class="slider">
-      <img src="C:/Users/HP/Desktop/autown/gallery1.jpg" alt="Image 1">
-      <img src="C:/Users/HP/Desktop/autown/gallery2.jpg" alt="Image 2">
-      <img src="C:/Users/HP/Desktop/autown/gallery3.jpg" alt="Image 3">
-      <img src="C:/Users/HP/Desktop/autown/gallery4.jpg" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0271.JPG" alt="Image 1">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0273.JPG" alt="Image 2">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0275.JPG" alt="Image 3">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0280.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0286.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0299.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0398.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0403.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0415.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0417.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0425.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0439.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0503.JPG" alt="Image 4">
+      <img src="C:\Users\HP\Desktop\autown\images\WILP0527.JPG" alt="Image 4">
     </div>
   </div>
 </section>
@@ -605,7 +687,7 @@ body::before {
   <h2>Venue</h2>
 
    <h3>BITS Pilani Hyderabad Campus. BITS Hyderabad Campus Shamirpeth Mandal 500078.</h3>
-  <h3> Contact: autownsupport@wilp.bits-pilani.ac.in</h3>
+   <h3> Contact: autownsupport@wilp.bits-pilani.ac.in
 
 </section>
 <footer>
@@ -615,15 +697,3 @@ body::before {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
