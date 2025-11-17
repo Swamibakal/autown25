@@ -428,8 +428,21 @@ body::before {
   margin-top: 8px;
   opacity: 0.9;
 }
+.event-gallery {
+  display: flex;
+  flex-wrap: wrap;      /* Allows wrapping on smaller screens */
+  gap: 30px;            /* Space between images */
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
 
-
+.event-item {
+  text-align: center;
+}
+.event-item h3 {
+  margin-top: 10px;
+}
   </style>
 </head>
 <body>
@@ -469,8 +482,8 @@ body::before {
   <a href="#about">About</a>
   <a href="#events">Events</a>
   <a href="#schedule">Schedule</a>
-  <a href="#Venue">Venue</a>
   <a href="#gallery">Autown'24</a>
+  <a href="#Venue">Venue</a>
 
 </nav>
 
@@ -526,25 +539,44 @@ body::before {
     <li><strong>Competitions:</strong> Project and poster presentations, Robo racing, Drone racing.</li>
     <li><strong>Workshops:</strong> Cybersecurity and Autonomous Vehicles.</li>
   </ul>
+<div class="event-gallery">
 
-  <div>
-    <!-- All images link to ONE Google Form -->
+  <div class="event-item">
     <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
-      <div class="img-box"><img src="images/robo.png" alt="Robo Racing"></div>
+      <div class="img-box">
+        <img src="images/robo.png" alt="Robo Racing">
+      </div>
     </a>
-
-    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
-      <div class="img-box"><img src="images/drone.jpg" alt="Drone Racing"></div>
-    </a>
-
-    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
-      <div class="img-box"><img src="images/cybersecurity.jpeg" alt="Cybersecurity"></div>
-    </a>
-
-    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
-      <div class="img-box"><img src="images/autonmous.jpeg" alt="Autonomous Vehicles"></div>
-    </a>
+    <h3>Robo Racing</h3>
   </div>
+
+  <div class="event-item">
+    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+      <div class="img-box">
+        <img src="images/drone.jpg" alt="Drone Racing">
+      </div>
+    </a>
+    <h3>Drone Racing</h3>
+  </div>
+
+  <div class="event-item">
+    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+      <div class="img-box">
+        <img src="images/workshop.jpg" alt="Workshop">
+      </div>
+    </a>
+    <h3>Workshops</h3>
+  </div>
+
+  <div class="event-item">
+    <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+      <div class="img-box">
+        <img src="C:\Users\HP\Desktop\autown\images\poster.png" alt="Poster Presentation">
+      </div>
+    </a>
+    <h3>Poster Presentation</h3>
+  </div>
+
 
   <h2> Speakers</h2>
   <p> Will be updated</p>
@@ -690,12 +722,42 @@ body::before {
   </div>
 </section>
 
-<section id="Venue">
+<<section id="Venue">
   <h2>Venue</h2>
 
-   <h3>BITS Pilani Hyderabad Campus. BITS Hyderabad Campus Shamirpeth Mandal 500078.</h3>
-   <h3> Contact: autownsupport@wilp.bits-pilani.ac.in
+  <h3>BITS Pilani Hyderabad Campus. BITS Hyderabad Campus Shamirpeth Mandal 500078.</h3>
+  <h3>Contact: autownsupport@wilp.bits-pilani.ac.in</h3>
 
+  <div style="text-align: center; margin-top: 20px;">
+  <a href=https://www.google.com/maps/place/Birla+Institute+of+Technology+%26+Science+Pilani,+Hyderabad+Campus/@17.5462878,78.5718489,915m/data=!3m2!1e3!5s0x3bcb9cb2ec082bcf:0x1985b4ad5caaad3b!4m6!3m5!1s0x3bcb83594a86132d:0xc3e06e9e76cebf3d!8m2!3d17.5448888!4d78.571838!16s%2Fm%2F09k5fsf!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D
+     target="_blank"
+     style="
+       display: inline-block;
+       padding: 12px 24px;
+       background: #00e5ff;
+       color: black;
+       font-weight: bold;
+       border-radius: 10px;
+       text-decoration: none;
+       box-shadow: 0 0 15px rgba(0,255,255,0.8);
+       transition: 0.3s;
+     "
+     onmouseover="this.style.transform='scale(1.05)'"
+     onmouseout="this.style.transform='scale(1)'">
+    📍 View on Google Maps
+  </a>
+</div>
+  <div style="margin-top: 30px; display: flex; justify-content: center;">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.4904047792003!2d78.57055267471334!3d17.610819697630097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8521befc2c3b%3A0xaea61bf4b077de6e!2sBITS%20Pilani%2C%20Hyderabad%20Campus!5e0!3m2!1sen!2sin!4v1707917960000!5m2!1sen!2sin"
+      width="80%"
+      height="350"
+      style="border:0; border-radius:15px; box-shadow:0 0 15px rgba(0,255,255,0.4);"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
 </section>
 <footer>
   © AUTOWN'25 AACE | Designed for the future of smart mobility|
@@ -704,6 +766,7 @@ body::before {
 
 </body>
 </html>
+
 
 
 
