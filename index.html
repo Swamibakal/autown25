@@ -466,7 +466,18 @@ header, section:first-of-type {
 .event-item h3 {
   margin-top: 10px;
 }
-    
+ @keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 15px rgba(0,255,255,0.7),
+                 0 0 25px rgba(0,255,255,0.5);
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(0,255,255,1),
+                 0 0 50px rgba(0,255,255,0.9);
+    transform: scale(1.07);
+  }
+}   
 </style>
 </head>
 <body>
@@ -576,17 +587,38 @@ experience in building intelligent, secure, and sustainable mobility ecosystems.
   </ul>
 
   <!-- Prize Money -->
-  <div style="
-      margin-top: 25px;
-      padding: 20px;
-      background: rgba(0,255,255,0.12);
-      border-left: 6px solid #00e5ff;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,255,255,0.3);
-    ">
-    <h3 style="color:#00e5ff; margin-top: 0;">🏆 Prize Money</h3>
-    <p style="font-size: 20px; font-weight: bold;">₹ 3,00,000 Total Prize Pool</p>
-  </div>
+<div style="
+    margin-top: 25px;
+    padding: 30px;
+    text-align: center;
+    background: rgba(0,255,255,0.10);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0,255,255,0.45), inset 0 0 20px rgba(0,255,255,0.25);
+    backdrop-filter: blur(6px);
+    border: 2px solid rgba(0,255,255,0.6);
+">
+  <h2 style="
+      color: #00eaff;
+      font-size: 34px;
+      margin: 0;
+      text-shadow: 0 0 12px #00eaff;
+  ">
+    🏆 Total Prize Money
+  </h2>
+
+  <p style="
+      font-size: 45px;
+      font-weight: bold;
+      margin-top: 15px;
+      background: linear-gradient(90deg, #00eaff, #00ffcc, #00eaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 18px rgba(0,255,255,0.8);
+      animation: glowPulse 2.5s ease-in-out infinite;
+  ">
+    ₹ 3,00,000
+  </p>
+</div>
 
   <!-- Registration Details -->
   <div style="
@@ -862,6 +894,7 @@ experience in building intelligent, secure, and sustainable mobility ecosystems.
 
 </body>
 </html>
+
 
 
 
