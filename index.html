@@ -1,974 +1,713 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AUTOWN'25 | AACE</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    html {
-      scroll-behavior: smooth;
+    :root{
+      --bg:#ffffff;
+      --muted:#6b7280;
+      --accent:#00bcd4; /* cyan-like accent */
+      --accent-dark:#00a5bf;
+      --card:#fbfdff;
+      --nav-bg:#0b1b4a; /* navy for top bar */
+      --nav-height:76px;
+      --radius:12px;
+      --container:1100px;
+      --glass: rgba(255,255,255,0.6);
     }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  background: #000814;
-  overflow-x: hidden;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      scroll-behavior:smooth;
+    }
+
+    .top-nav{
+      position:fixed;
+      left:0;right:0;
+      top:0;
+      height:var(--nav-height);
+      background:linear-gradient(180deg, rgba(11,27,74,0.98), rgba(8,18,56,0.96));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 22px;
+      z-index:1200;
+      box-shadow:0 6px 20px rgba(3,10,34,0.25);
+    }
+    .nav-inner{
+      max-width:var(--container);
+      margin:0 auto;
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:24px;
+      justify-content:space-between;
+    }
+    .nav-left{display:flex;align-items:center;gap:14px}
+    .nav-logo{height:54px; width:auto; display:block; border-radius:6px; object-fit:contain}
+    .nav-center{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .nav-center a{
+      color:rgba(255,255,255,0.92);
+      text-decoration:none;
+      font-weight:600;
+      font-size:15px;
+      padding:8px 6px;
+      border-radius:6px;
+      transition:all .18s ease;
+    }
+    .nav-center a:hover{color:var(--accent); transform:translateY(-2px)}
+    .nav-cta{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .btn{
+      background:var(--accent);
+      color:#042033;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 6px 18px rgba(0,172,191,0.12);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:hover{transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,172,191,0.18)}
+
+    .hamburger{
+      display:none;
+      width:44px;height:44px;border-radius:8px;
+      align-items:center;justify-content:center;
+      background:rgba(255,255,255,0.04);
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .hamburger span{display:block;width:20px;height:2px;background:#fff;border-radius:2px;box-shadow:0 6px 0 #fff,0 -6px 0 #fff}
+
+  
+    .hero{
+      max-width:var(--container);
+      margin:calc(var(--nav-height) + 36px) auto 24px;
+      padding:48px 28px;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:center;
+    }
+    .hero-card{
+      background:var(--card);
+      border-radius:16px;
+      padding:36px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.05);
+    }
+    .hero h1{
+      margin:0;
+      font-size:34px;
+      letter-spacing:0.4px;
+      color:#071332;
+    }
+    .hero .sub{color:var(--muted); margin-top:10px; font-size:16px}
+    .hero .kicker{display:inline-block;background:rgba(0,188,212,0.08); color:var(--accent); padding:6px 10px;border-radius:999px;font-weight:700;margin-bottom:14px}
+
+    .hero-right{
+      background:linear-gradient(180deg, rgba(0,172,191,0.06), rgba(0,172,191,0.03));
+      border-radius:16px;
+      padding:22px;
+      text-align:center;
+      box-shadow: inset 0 -4px 12px rgba(0,0,0,0.03);
+    }
+    .hero-right img{width:100%; height:auto; border-radius:10px; object-fit:cover; margin-bottom:14px}
+    .prize{
+      font-size:30px;color:var(--accent); font-weight:800;
+      margin:0;
+    }
+    .small-muted{color:var(--muted); font-size:14px}
+
+    .section{
+      max-width:var(--container);
+      margin:28px auto;
+      padding:28px;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(250,252,255,0.95), rgba(245,247,250,0.95));
+      box-shadow:0 8px 30px rgba(10,20,40,0.03);
+    }
+    .section h2{margin:0 0 14px 0; font-size:20px; color:#071332}
+    .two-col{display:grid; grid-template-columns:1fr 340px; gap:22px; align-items:start}
+
+
+    .event-grid{display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start}
+    .img-box{
+      width:220px; height:130px; border-radius:12px; overflow:hidden;
+      background:#f8fbfd; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 6px 18px rgba(2,6,23,0.04);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .img-box img{width:100%; height:100%; object-fit:cover}
+    .img-box:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(2,6,23,0.08)}
+
+    .reg-card{border-left:4px solid var(--accent); padding:18px; border-radius:10px; background:linear-gradient(180deg, rgba(240,249,250,0.9), rgba(255,255,255,0.9))}
+
+    .speakers-grid{display:flex; gap:26px; flex-wrap:wrap; justify-content:center}
+    .speaker{
+      width:220px; text-align:center; background:white; border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(2,6,23,0.04)
+    }
+    .speaker img{width:140px; height:140px; border-radius:50%; object-fit:cover; box-shadow:0 8px 20px rgba(2,6,23,0.06)}
+
+    .schedule-list{display:flex; gap:18px; flex-wrap:wrap}
+    .schedule-day{flex:1; min-width:260px; background:white; padding:14px; border-radius:10px; box-shadow:0 8px 24px rgba(2,6,23,0.04)}
+    .slot{padding:10px 12px;border-radius:8px;margin:8px 0;background:#f6fbff;border-left:4px solid var(--accent); font-weight:600}
+
+
+    .sponsor-grid{display:flex; gap:18px; flex-wrap:wrap; justify-content:center}
+    .sponsor-box{width:200px;padding:18px;border-radius:12px;text-align:center;font-weight:700;box-shadow:0 10px 30px rgba(2,6,23,0.04)}
+    .bronze{background:linear-gradient(135deg,#e5a06a,#c7763a); color:#fff}
+    .silver{background:linear-gradient(135deg,#d7dfe6,#bfc9d8); color:#042033}
+    .gold{background:linear-gradient(135deg,#ffd966,#e6b800); color:#042033}
+    .platinum{background:linear-gradient(135deg,#e9eef2,#cfd9e2); color:#042033}
+
+    .slider-wrap{overflow:hidden;border-radius:12px}
+    .slider{display:flex; gap:14px; padding:12px; transition:transform .5s ease}
+    .slider img{width:300px; height:200px; object-fit:cover; border-radius:10px; box-shadow:0 10px 26px rgba(2,6,23,0.06)}
+
+
+    footer{max-width:var(--container); margin:28px auto 60px; text-align:center; color:var(--muted); font-size:13px}
+
+    @media (max-width:1080px){
+      .hero{grid-template-columns:1fr 320px}
+      .nav-center{display:none}
+      .hamburger{display:flex}
+    }
+    @media (max-width:820px){
+      .hero{grid-template-columns:1fr; padding:22px}
+      .two-col{grid-template-columns:1fr}
+      .hero-right{order:2}
+      .nav-inner{gap:10px}
+      .event-grid{justify-content:center}
+    }
+
+
+    .fade-up{opacity:0; transform:translateY(10px); transition:all .6s cubic-bezier(.2,.9,.2,1)}
+    .in-view{opacity:1; transform:none}
+.slideshow-container {
+  max-width: 100%;
   position: relative;
-}
-
-.car {
-  position: fixed;
-  width: 45px;
-  height: 24px;
-  background: url('https://i.imgur.com/tQfGq92.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.55; /* brighter */
-  filter: drop-shadow(0 0 6px cyan);
-  animation: drive 14s linear infinite;
-  z-index: -5;
-}
-
-.car:nth-child(1) { top: 20%; animation-delay: 0s; }
-.car:nth-child(2) { top: 50%; animation-delay: 3s; }
-.car:nth-child(3) { top: 75%; animation-delay: 6s; }
-
-@keyframes drive {
-  from { left: -120px; transform: scale(1); }
-  to   { left: 110%; transform: scale(1.1); }
-}
-
-.ai-node {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: cyan;
-  border-radius: 50%;
-  opacity: 0.5;
-  z-index: -6;
-  box-shadow: 0 0 10px cyan;
-  animation: floatNode 6s ease-in-out infinite;
-}
-
-.ai-node:nth-child(4) { top: 25%; left: 30%; animation-delay: 0s; }
-.ai-node:nth-child(5) { top: 45%; left: 60%; animation-delay: 1s; }
-.ai-node:nth-child(6) { top: 70%; left: 40%; animation-delay: 2s; }
-
-@keyframes floatNode {
-  0%, 100% { transform: translateY(0px); opacity: 0.4; }
-  50%      { transform: translateY(-20px); opacity: 0.8; }
-}
-
-.cube {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  background: rgba(0,255,255,0.3);
-  border: 2px solid rgba(0,255,255,0.6);
-  border-radius: 8px;
-  transform-style: preserve-3d;
-  animation: rotateCube 8s linear infinite, floatCube 6s ease-in-out infinite;
-  z-index: -7;
-  box-shadow: 0 0 12px cyan;
-}
-
-.cube:nth-child(7) { top: 20%; left: 20%; }
-.cube:nth-child(8) { top: 55%; left: 75%; }
-.cube:nth-child(9) { top: 40%; left: 50%; }
-
-@keyframes rotateCube {
-  from { transform: rotateX(0deg) rotateY(0deg); }
-  to   { transform: rotateX(360deg) rotateY(360deg); }
-}
-
-@keyframes floatCube {
-  0%,100% { transform: translateY(0px); }
-  50%     { transform: translateY(-25px); }
-}
-
-.matrix {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  color: rgba(0,255,70,0.55); /* brighter neon green */
-  font-family: monospace;
-  font-size: 20px;
-  text-shadow: 0 0 8px #00ff41;
-  overflow: hidden;
-  white-space: pre;
-  animation: matrixRain 8s linear infinite;
-  z-index: -10;
-}
-
-@keyframes matrixRain {
-  from { transform: translateY(-100%); }
-  to   { transform: translateY(100%); }
-}
-
-.spark {
-  position: fixed;
-  width: 4px;
-  height: 90px;
-  background: rgba(0,255,255,0.85);
-  filter: blur(1px);
-  border-radius: 5px;
-  animation: sparkMove 4s linear infinite;
-  z-index: -8;
-  box-shadow: 0 0 15px #00eaff;
-}
-
-.spark:nth-child(10) { top: 10%; left: 30%; }
-.spark:nth-child(11) { top: 50%; left: 80%; }
-.spark:nth-child(12) { top: 70%; left: 15%; }
-
-@keyframes sparkMove {
-  from { transform: translate(-40px, -40px) rotate(35deg); opacity: 1; }
-  to   { transform: translate(300px, 300px) rotate(35deg); opacity: 0; }
-}
-
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(120deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
-  background-size: 200% 200%;
-  animation: gradientMove 10s ease infinite;
-  z-index: -1;
-}
-
-.top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: #0a0f52; /* deep BITS-style navy */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30px;
-  border-bottom: 3px solid #161f7a;
-  z-index: 2000;
-  box-sizing: border-box;
-}
-.nav-left {
-  display: flex;
-  align-items: center;
-}
-
-.nav-logo {
-  height: 55px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 0 3px rgba(255,255,255,0.4));
-}
-
-.nav-center {
-  display: flex;
-  gap: 35px;
-}
-
-.nav-center a {
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration: none;
-  padding-bottom: 6px;
-  position: relative;
-  transition: 0.3s;
-}
-
-.nav-center a:hover {
-  color: #00e5ff;
-}
-
-.nav-center a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 0%;
-  height: 2px;
-  background: #00e5ff;
-  transition: 0.3s;
-}
-
-.nav-center a:hover::after {
-  width: 100%;
-}
-
-header, section:first-of-type {
-  margin-top: 100px !important;
-}
-    header {
-      text-align: center;
-      padding: 100px 20px 40px 20px;
-      background: rgba(0, 0, 0, 0.3);
-      margin-top: 50px;
-    }
-
-    .logo {
-      width: 200px;
-      height: auto;
-      margin-bottom: 15px;
-    }
-
-    h1 {
-      font-size: 48px;
-      margin: 10px 0;
-      letter-spacing: 2px;
-    }
-
-    .tagline {
-      font-size: 20px;
-      margin-top: 10px;
-      opacity: 0.9;
-    }
-
-    section {
-      padding: 50px 10%;
-      background: rgba(0,0,0,0.25);
-      margin: 20px 5%;
-      border-radius: 16px;
-    }
-
-    h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-      border-bottom: 2px solid #fff;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-
-    ul, p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-.schedule-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.schedule-day {
-  flex: 1;
-  min-width: 350px;
-}
-
-.schedule-day h3 {
-  text-align: center;
-  color: #00e5ff;
-}
-
-.schedule-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed; /* Forces equal column widths */
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.schedule-table th,
-.schedule-table td {
-  border: 1px solid #fff;
-  padding: 12px;
-  text-align: left;
-  width: 50%; /* Make both columns same width */
-}
-
-.schedule-table th:first-child,
-.schedule-table td:first-child {
-  text-align: center;
-  width: 40%; /* Adjust width for 'Time' */
-}
-
-.schedule-table th:last-child,
-.schedule-table td:last-child {
-  width: 60%; /* Adjust width for 'Session' */
-}
-
-    .img-box {
-      width: 200px;
-      height: 120px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin: 10px;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .img-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .img-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0,255,255,0.6);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0,0,0,0.4);
-      font-size: 10px;
-      margin-top: 40px;
-    }
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-btn {
-  background: rgba(255,255,255,0.15);
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #00e5ff;
-  transition: 0.3s;
-}
-
-.dropdown-btn:hover {
-  background: rgba(0,255,255,0.25);
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background: rgba(0,0,0,0.8);
-  min-width: 250px;
-  border-radius: 8px;
-  padding: 10px 0;
-  z-index: 20;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.dropdown-content a {
-  color: white;
-  padding: 10px 20px;
-  display: block;
-  text-decoration: none;
-  transition: 0.25s;
-}
-
-.dropdown-content a:hover {
-  background: rgba(0,255,255,0.18);
-  color: #00e5ff;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-#schedule .slot {
-    padding: 16px;
-    margin: 12px 0;
-    border-radius: 10px;
-    font-size: 18px;
-    box-shadow: 0 0 10px rgba(0,255,255,0.2);
-    backdrop-filter: blur(4px);
-  }
-  .slider-container {
-  width: 100%;
-  overflow: hidden;
-  margin: 20px 0;
-  border-radius: 14px;
-}
-
-.slider {
-  display: flex;
-  width: max-content;
-  animation: slide 90s linear infinite;
-}
-
-.slider img {
-  width: 480px;
-  height: 300px;
-  object-fit: cover;
-  margin-right: 20px;
+  margin: 20px auto;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0,255,255,0.8);
+  overflow: hidden;
+  background: #f7fafc;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.06);
 }
 
-@keyframes slide {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.sponsor-container {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
-  margin-top: 25px;
+.slide {
+  display: none;
 }
 
-.sponsor-box {
-  width: 200px;
-  padding: 20px;
-  border-radius: 14px;
-  text-align: center;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+.slide img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Fade effect */
+.fade {
+  animation: fadeEffect 1.3s;
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0.3}
+  to {opacity: 1}
+}
+
+/* Next & Prev buttons */
+.prev, .next {
   cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -30px;
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
+  transition: 0.3s ease;
+  user-select: none;
+  border-radius: 0 6px 6px 0;
+  background: rgba(0,0,0,0.35);
 }
 
-.sponsor-box:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 20px rgba(0,255,255,0.6);
+.next {
+  right: 0;
+  border-radius: 6px 0 0 6px;
 }
 
-.bronze {
-  background: linear-gradient(135deg, #cd7f32, #b36a23);
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.55);
 }
 
-.silver {
-  background: linear-gradient(135deg, #c0c0c0, #a8a8a8);
+/* Dots */
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: 0.3s ease;
 }
 
-.gold {
-  background: linear-gradient(135deg, #ffd700, #e6c200);
+.active, .dot:hover {
+  background-color: var(--accent);
+  transform: scale(1.2);
 }
-
-.platinum {
-  background: linear-gradient(135deg, #e5e4e2, #cccccc);
-}
-
-.sponsor-price {
-  font-size: 16px;
-  margin-top: 8px;
-  opacity: 0.9;
-}
-.event-gallery {
-  display: flex;
-  flex-wrap: wrap;      /* Allows wrapping on smaller screens */
-  gap: 30px;            /* Space between images */
-  justify-content: center;
-  align-items: center;
-  margin-top: 25px;
-}
-
-.event-item {
-  text-align: center;
-}
-.event-item h3 {
-  margin-top: 10px;
-}
- @keyframes glowPulse {
-  0%, 100% {
-    text-shadow: 0 0 15px rgba(0,255,255,0.7),
-                 0 0 25px rgba(0,255,255,0.5);
-    transform: scale(1);
-  }
-  50% {
-    text-shadow: 0 0 30px rgba(0,255,255,1),
-                 0 0 50px rgba(0,255,255,0.9);
-    transform: scale(1.07);
-  }
-}   
-</style>
+  </style>
 </head>
 <body>
-  <body>
 
 
-  <div class="car"></div>
-  <div class="car"></div>
-  <div class="car"></div>
+  <nav class="top-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <img src="images/wilp logo (2).jpeg" alt="BITS Pilani WILP" class="nav-logo">
+        <div style="display:none; font-weight:800; color:#fff; font-size:14px">AUTOWN'25</div>
+      </div>
 
-  <div class="ai-node"></div>
-  <div class="ai-node"></div>
-  <div class="ai-node"></div>
+      <div class="nav-center" role="navigation" aria-hidden="false">
+        <a href="#heading">Home</a>
+        <a href="#vision">Vision</a>
+        <a href="#objectives">Objectives</a>
+        <a href="#about">About</a>
+        <a href="#events">Events</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#Sponsorship">Sponsorship</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#Venue">Venue</a>
+      </div>
 
-
-  <div class="cube"></div>
-  <div class="cube"></div>
-  <div class="cube"></div>
-
- 
-  <div class="matrix">
-    01010101010101010<br>
-    11001010101100101<br>
-    10101111001001010<br>
-    01001101011010110<br>
-    11000101010111001<br>
-  </div>
-
-  <!-- EV ELECTRIC SPARKS -->
-  <div class="spark"></div>
-  <div class="spark"></div>
-  <div class="spark"></div>
-    
-<nav class="top-nav">
-
-  <div class="nav-left">
-    <img src="images/wilp logo (2).jpeg" alt="BITS Pilani Logo" class="nav-logo">
-  </div>
-
-  <div class="nav-center">
-    <a href="#heading">Home</a>
-    <a href="#vision">Vision</a>
-    <a href="#objectives">Objectives</a>
-    <a href="#about">About</a>
-    <a href="#events">Events</a>
-    <a href="#speakers">Speakers</a>
-    <a href="#schedule">Schedule</a>
-    <a href="#Sponsorship">Sponsorship</a>
-    <a href="#gallery">Autown'24</a>
-    <a href="#Venue">Venue</a>
-  </div>
-
-</nav>
-
-<header>
-  <section id= heading> <h4>
-  <img src="images/autown final.png"
-       alt="AUTOWN Logo"
-       style="width: 600px; height: 220px;"
-       align="center"></h4>
-    <h2 align= center> AACE </h2><br>
-  <h2>Autonomous • AI • Cybersecurity • EV</h2>
-  <p class="tagline">Powering Innovation Towards a Smarter and Safer Automotive Future.</p>
-</section>
-</header>
-
-<section id="vision">
-  <h2>Vision</h2>
-  <p>To create a collaborative platform where academia, industry, and policymakers converge to discuss the transformative technologies shaping the mobility landscape — from autonomous driving and AI-enabled decision systems to cybersecurity and sustainable electric mobility.</p>
-</section>
-
-<section id="objectives">
-  <h2>Objectives</h2>
-  <ul>
-    <li>Advance knowledge and collaboration in autonomous vehicles, AI, cybersecurity, and electric mobility.</li>
-    <li>Explore integration of intelligence, connectivity, and security in next-gen vehicles.</li>
-    <li>Provide hands-on learning through workshops and interactive sessions.</li>
-  </ul>
-</section>
-
-<section id="about">
-  <h2>About the Event</h2>
-  <p>
-   AUTOWN’25 aims to bring together academia, industry, and policymakers on a collaborative
-platform to explore the transformative technologies driving the future of transportation. Focusing on
-autonomous vehicles, artificial intelligence, automotive cybersecurity, and electric mobility, the event
-seeks to foster innovation, knowledge exchange, and sustainable mobility solutions. Through expert
-talks, technical sessions, and hands-on workshops, participants will engage with emerging tools,
-simulation platforms, and real-world applications, gaining both strategic insights and practical
-experience in building intelligent, secure, and sustainable mobility ecosystems.
-  </p>
-  <div class="dropdown">
-    <div class="dropdown-btn">About WILP ▼</div>
-    <div class="dropdown-content">
-      <a href="https://bits-pilani-wilp.ac.in">Visit BITS Pilani WILP Website</a>
-    </div>
-  </div>
-</section>
-
-<section id="events">
-  <h2>Events</h2>
-  <ul>
-    <li><strong>Talks:</strong> Expert lectures by industry personnel.</li>
-    <li><strong>Competitions:</strong> Project and poster presentations, Drone & Robo Racing.</li>
-    <li><strong>Workshops:</strong> Cybersecurity and Autonomous Vehicles.</li>
-  </ul>
-
-<div style="
-    margin-top: 25px;
-    padding: 30px;
-    text-align: center;
-    background: rgba(0,255,255,0.10);
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(0,255,255,0.45), inset 0 0 20px rgba(0,255,255,0.25);
-    backdrop-filter: blur(6px);
-    border: 2px solid rgba(0,255,255,0.6);
-">
-  <h2 style="
-      color: #00eaff;
-      font-size: 34px;
-      margin: 0;
-      text-shadow: 0 0 12px #00eaff;
-  ">
-    🏆 Total Prize Money
-  </h2>
-
-  <p style="
-      font-size: 45px;
-      font-weight: bold;
-      margin-top: 15px;
-      background: linear-gradient(90deg, #00eaff, #00ffcc, #00eaff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 18px rgba(0,255,255,0.8);
-      animation: glowPulse 2.5s ease-in-out infinite;
-  ">
-    ₹ 3,00,000
-  </p>
-</div>
-
-  <div style="
-      margin-top: 25px;
-      padding: 20px;
-      background: rgba(255,0,153,0.12);
-      border-left: 6px solid #ff0099;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(255,0,153,0.3);
-    ">
-    <h3 style="color:#ff66cc; margin-top: 0;">📝 Registration Details</h3>
-    <ul style="font-size: 18px; line-height: 1.7;">
-      <li><strong>Event 1:</strong> Poster & Project Presentation — <strong>₹ 1000</strong></li>
-      <li><strong>Event 2:</strong> Drone Racing — <strong>₹ 3000</strong></li>
-      <li><strong>Event 3:</strong> Robo Racing — <strong>₹ 3000</strong></li>
-    </ul>
-  </div>
-
-  <h3 style="margin-top:35px;">For Registrations and to know more click on the images.</h3>
-
-  <div class="event-gallery">
-    <div class="event-item">
-      <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
-        <div class="img-box">
-          <img src="images/robo.png" alt="Robo Racing">
+      <div class="nav-cta">
+        <a href="#events" class="btn">Register</a>
+        <div class="hamburger" id="hamb">
+          <span></span>
         </div>
-      </a>
-      <h3>Robo Racing</h3>
+      </div>
     </div>
+  </nav>
 
-    <div class="event-item">
-      <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
-        <div class="img-box">
-          <img src="images/drone.jpg" alt="Drone Racing">
+  <main>
+    <section class="hero" id="heading">
+      <div class="hero-card fade-up">
+        <div class="kicker">• AUTOWN'25</div>
+        <h1>AACE</h1>
+        <h1>Autonomous • AI • Cybersecurity • EV</h1>
+        <p class="sub">Powering innovation towards a smarter and safer automotive future. Join experts, competitions, workshops and hands-on labs at BITS Pilani Hyderabad Campus.</p>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn" href="#events">Register Now</a>
+          <a href="#Venue" style="color:var(--accent); font-weight:700; text-decoration:none; padding:10px 14px; border-radius:10px; background:transparent; border:1px solid rgba(0,172,191,0.06)">View Venue</a>
         </div>
-      </a>
-      <h3>Drone Racing</h3>
-    </div>
 
-    <div class="event-item">
-      <a href="https://forms.gle/95nV1nxtQzgY7D7y8" target="_blank">
-        <div class="img-box">
-          <img src="images/workshop.jpg" alt="Workshop">
+        <div style="margin-top:26px; display:flex; gap:18px; align-items:center; flex-wrap:wrap;">
+          <div style="display:flex; gap:10px; align-items:center">
+            <div style="background:rgba(0,172,191,0.08);padding:8px;border-radius:8px;font-weight:800;color:var(--accent)">₹ 3,00,000</div>
+            <div style="color:var(--muted)">Total Prize Money</div>
+          </div>
+          <div style="margin-left:auto; color:var(--muted); font-size:13px">Registration ends on <strong>Dec 31, 2025</strong></div>
         </div>
-      </a>
-      <h3>Workshops</h3>
-    </div>
+      </div>
 
-    <div class="event-item">
-      <a href="https://forms.gle/mATq4TnsuouvX2qm8" target="_blank">
-        <div class="img-box">
-          <img src="images/poster.png" alt="Poster Presentation">
+      <aside class="hero-right fade-up" aria-labelledby="hero-right-title">
+        <img src="images/autown final.png" alt="AUTOWN Logo">
+        <p class="small-muted">Workshops • Competitions • Talks • Networking</p>
+        <div style="margin-top:12px;">
+          <a class="btn" href="https://forms.gle/95nV1nxtQzgY7D7y8" target="_blank">Register as Attendee</a>
         </div>
-      </a>
-      <h3>Poster Presentation</h3>
-    </div>
-    
-<div style="
-    margin-top: 25px;
-    padding: 25px;
-    background: rgba(0, 153, 255, 0.12);
-    border-left: 6px solid #0099ff;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,153,255,0.35);
-">
-  <h3 style="color:#33cfff; margin-top: 0;">👥 Attendee Registration</h3>
+      </aside>
+    </section>
 
-  <p style="font-size: 18px; line-height: 1.6;">
-    Those who wish to attend the event (talks, exhibition, competitions, workshops as audience)  
-    can register using the link below.
-  </p>
+    <section id="vision" class="section fade-up">
+      <div class="two-col">
+        <div>
+          <h2>Vision</h2>
+          <p>To create a collaborative platform where academia, industry, and policymakers converge to discuss the transformative technologies shaping the mobility landscape — from autonomous driving and AI-enabled decision systems to cybersecurity and sustainable electric mobility.</p>
+        </div>
+        <aside>
+          <h2>Quick Facts</h2>
+          <ul style="margin:8px 0 0 18px; color:var(--muted)">
+            <li>Dates: Feb 20–21, 2026</li>
+            <li>Venue: BITS Pilani, Hyderabad Campus</li>
+            <li>Tracks: Autonomous • AI • Cybersecurity • EV</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
-  <div style="text-align: center; margin-top: 15px;">
-    <a href="https://forms.gle/95nV1nxtQzgY7D7y8" target="_blank"
-       style="
-          display: inline-block;
-          padding: 12px 28px;
-          background: #00e5ff;
-          color: #000;
-          font-weight: bold;
-          border-radius: 10px;
-          text-decoration: none;
-          font-size: 20px;
-          box-shadow: 0 0 15px rgba(0,255,255,0.8);
-          transition: 0.3s;
-       "
-       onmouseover="this.style.transform='scale(1.07)'"
-       onmouseout="this.style.transform='scale(1)'">
-      Register as Attendee
-    </a><br>
-    **Registration end's on 31st December 2025**
-  </div>
-</div>
-  </div>
-</section>
+    <section id="objectives" class="section fade-up">
+      <h2>Objectives</h2>
+      <ul>
+        <li>Advance knowledge and collaboration in autonomous vehicles, AI systems, cybersecurity, and electric mobility.</li>
+        <li>Explore integration of intelligence, connectivity, and security in next-gen vehicles.</li>
+        <li>Provide hands-on learning through workshops, competitions and interactive sessions.</li>
+      </ul>
+    </section>
 
-<section id="speakers">
-  <h2>Speakers</h2>
+    <section id="about" class="section fade-up">
+      <h2>About the Event</h2>
+      <p>AUTOWN’25 brings together academia, industry and policymakers to explore technologies driving the future of transportation — autonomous vehicles, AI, automotive cybersecurity and electric mobility. Expect keynote talks, technical sessions, hands-on workshops, and competitive events: Drone & Robo Racing, Project & Poster presentations.</p>
 
-  <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin-top: 30px;">
+      <div style="margin-top:18px; display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap">
+        <div class="reg-card" style="flex:1; min-width:260px">
+          <h3 style="margin:0 0 8px 0">Attendee Registration</h3>
+          <p class="small-muted">Register to attend talks, exhibitions and workshops as audience.</p>
+          <a class="btn" href="https://forms.gle/95nV1nxtQzgY7D7y8" target="_blank" style="margin-top:10px; display:inline-block">Register as Attendee</a>
+        </div>
 
-    <!-- Speaker 1 -->
-    <div style="text-align: center; width: 220px;">
-      <img src="images/1.jpeg"
-           alt="Sathyanarayana PVV"
-           style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 15px rgba(0,255,255,0.6);">
-      <h3 style="margin-top: 15px;">Sathyanarayana PVV<br><h4>Vice President and Head of R&D.<br>AVTEC Limited.</h4></h3><br><br>
-      <a href="https://www.linkedin.com/in/sathyanarayana-pvv-7b54a5104/"
-         target="_blank"
-         style="color: #00e5ff; font-weight: bold; text-decoration: none;">LinkedIn Profile</a>
-    </div>
+        <div style="width:320px">
+          <h3 style="margin-top:0">About WILP</h3>
+          <p class="small-muted">Work Integrated Learning Program (WILP), BITS Pilani - offers career-centric courses that bridge industry and academia.</p>
+          <div style="margin-top:8px">
+            <a href="https://bits-pilani-wilp.ac.in" target="_blank" style="text-decoration:none; color:var(--accent); font-weight:700">Visit WILP Website →</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Speaker 2 -->
-    <div style="text-align: center; width: 220px;">
-      <img src="images/2.jpeg"
-           alt="Philip Jose"
-           style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 15px rgba(0,255,255,0.6);">
-      <h3 style="margin-top: 15px;">Philip Jose<br><h4>Head of Product Development, Mahindra Last Mile Mobility Ltd.<br>Mahindra Last Mile Mobility Ltd.</h4></h3>
-      <a href="https://www.linkedin.com/in/philip-jose-85381782/"
-         target="_blank"
-         style="color: #00e5ff; font-weight: bold; text-decoration: none;">LinkedIn Profile</a>
-    </div>
+    <section id="events" class="section fade-up">
+      <h2>Events</h2>
+      <div class="event-grid" style="margin-top:12px">
+        <div class="event-item" style="text-align:center">
+          <a href="https://forms.gle/mATq4TnsuouvX2qm8" target="_blank">
+            <div class="img-box"><img src="images/poster.png" alt="Poster"></div>
+          </a>
+          <h4 style="margin:10px 0 0 0">Poster Presentation</h4>
+        </div>
 
-  </div>
-</section>
+        <div class="event-item" style="text-align:center">
+          <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+            <div class="img-box"><img src="images/robo.png" alt="Robo"></div>
+          </a>
+          <h4 style="margin:10px 0 0 0">Robo Racing</h4>
+        </div>
 
+        <div class="event-item" style="text-align:center">
+          <a href="https://forms.gle/BJYjgZkQSjdnVRNFA" target="_blank">
+            <div class="img-box"><img src="images/drone.jpg" alt="Drone"></div>
+          </a>
+          <h4 style="margin:10px 0 0 0">Drone Racing</h4>
+        </div>
 
-<section id="schedule">
-  <h2>Schedule</h2>
+        <div class="event-item" style="text-align:center">
+          <a href="https://forms.gle/95nV1nxtQzgY7D7y8" target="_blank">
+            <div class="img-box"><img src="images/workshop.jpg" alt="Workshop"></div>
+          </a>
+          <h4 style="margin:10px 0 0 0">Workshops</h4>
+        </div>
+      </div>
 
-  <h3>Day 1 - 20.02.2026</h3>
-  
-  <div class="slot" style="background:#00e5ff33; border-left:6px solid #00e5ff;">
-    <strong>09:30 AM – 10:00 AM</strong><br>Inaugural
-  </div>
-  <div class="slot" style="background:#ff009933; border-left:6px solid #ff0099;">
-    <strong>10:00 AM – 10:40 AM</strong><br>Expert Talk 1
-  </div>
-  <div class="slot" style="background:#00ff9d33; border-left:6px solid #00ff9d;">
-    <strong>10:40 AM – 11:20 AM</strong><br>Expert Talk 2
-  </div>
-  <div class="slot" style="background:#ffcc0033; border-left:6px solid #ffcc00;">
-    <strong>11:20 AM – 11:40 AM</strong><br>Tea Break
-  </div>
-  <div class="slot" style="background:#00c3ff33; border-left:6px solid #00c3ff;">
-    <strong>11:40 AM – 12:20 PM</strong><br>Expert Talk 3
-  </div>
-  <div class="slot" style="background:#ff660033; border-left:6px solid #ff6600;">
-    <strong>12:20 PM – 01:00 PM</strong><br>Expert Talk 4
-  </div>
-  <div class="slot" style="background:#0099ff33; border-left:6px solid #0099ff;">
-    <strong>01:00 PM – 02:00 PM</strong><br>Lunch Break
-  </div>
-  <div class="slot" style="background:#9d00ff33; border-left:6px solid #9d00ff;">
-    <strong>02:00 PM – 04:00 PM</strong><br>Workshop 1
-  </div>
-  <div class="slot" style="background:#ffaa0033; border-left:6px solid #ffaa00;">
-    <strong>04:00 PM – 04:20 PM</strong><br>Tea Break
-  </div>
-  <div class="slot" style="background:#00ffcc33; border-left:6px solid #00ffcc;">
-    <strong>04:20 PM – 06:00 PM</strong><br>Project Presentation
-  </div>
+      <div style="margin-top:22px; padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(0,188,212,0.06), rgba(0,188,212,0.02)); display:flex; gap:18px; align-items:center; justify-content:space-between;">
+        <div>
+          <h3 style="margin:0; color:var(--accent)">🏆 Total Prize Money</h3>
+          <p style="font-size:22px; margin:6px 0 0 0; font-weight:800">₹ 3,00,000</p>
+        </div>
+        <div style="text-align:right">
+          <div class="small-muted">For registrations and more click on the images above</div>
+        </div>
+      </div>
+    </section>
 
-  <h3>Day 2 - 21.02.2026</h3>
+    <section id="speakers" class="section fade-up">
+      <h2>Speakers</h2>
+      <div class="speakers-grid" style="margin-top:18px">
+        <div class="speaker">
+          <img src="images/1.jpeg" alt="Sathyanarayana PVV">
+          <h3 style="margin:12px 0 6px 0">Mr. Sathyanarayana PVV</h3>
+          <div style="font-size:13px; color:var(--muted)">Vice President and Head of R&D, AVTEC Limited</div>
+          <div style="margin-top:10px"><a href="https://www.linkedin.com/in/sathyanarayana-pvv-7b54a5104/" target="_blank" style="color:var(--accent); font-weight:700; text-decoration:none">LinkedIn</a></div>
+        </div>
 
-  <div class="slot" style="background:#00e5ff33; border-left:6px solid #00e5ff;">
-    <strong>09:30 AM – 09:45 AM</strong><br>Sponsor Slot 1
-  </div>
-  <div class="slot" style="background:#ff009933; border-left:6px solid #ff0099;">
-    <strong>09:45 AM – 10:00 AM</strong><br>Sponsor Slot 2
-  </div>
-  <div class="slot" style="background:#00ff9d33; border-left:6px solid #00ff9d;">
-    <strong>10:00 AM – 10:15 AM</strong><br>Sponsor Slot 3
-  </div>
-  <div class="slot" style="background:#ff660033; border-left:6px solid #ff6600;">
-    <strong>10:15 AM – 10:30 AM</strong><br>Sponsor Slot 4
-  </div>
-  <div class="slot" style="background:#ffcc0033; border-left:6px solid #ffcc00;">
-    <strong>10:30 AM – 10:45 AM</strong><br>Tea Break
-  </div>
-  <div class="slot" style="background:#0099ff33; border-left:6px solid #0099ff;">
-    <strong>10:45 AM – 01:00 PM</strong><br>Competitions (Robo race, Drone race, Project)
-  </div>
-  <div class="slot" style="background:#00c3ff33; border-left:6px solid #00c3ff;">
-    <strong>01:00 PM – 02:00 PM</strong><br>Lunch Break
-  </div>
-  <div class="slot" style="background:#9d00ff33; border-left:6px solid #9d00ff;">
-    <strong>02:00 PM – 04:00 PM</strong><br>Workshop 2
-  </div>
-  <div class="slot" style="background:#ffaa0033; border-left:6px solid #ffaa00;">
-    <strong>04:00 PM – 04:15 PM</strong><br>Tea Break
-  </div>
-  <div class="slot" style="background:#00ffcc33; border-left:6px solid #00ffcc;">
-    <strong>04:15 PM – 05:00 PM</strong><br>Valedictory & Prize Distribution
-  </div>
+        <div class="speaker">
+          <img src="images/12.png" alt="Philip Jose">
+          <h3 style="margin:12px 0 6px 0">Mr. Pradeep Chedambadi</h3>
+          <div style="font-size:13px; color:var(--muted)">Senior Technical lead, Bosch Global Software Technologies.</div>
+        </div>
+      </div>
+    </section>
 
-</section>
-<section id="Sponsorship">
-  <h2>Sponsorship</h2>
+    <section id="schedule" class="section fade-up">
+      <h2>Schedule</h2>
 
-  <h3>
-    We are excited to offer sponsorship opportunities for AUTOWN'25.  
-    Choose from the following categories:
-  </h3>
+      <div style="margin-top:12px">
+        <h3 style="margin:0 0 8px 0">Day 1 - 20.02.2026</h3>
+        <div class="schedule-list">
+          <div class="schedule-day">
+            <div class="slot"><strong>09:30–10:00</strong> — Inaugural</div>
+            <div class="slot" style="background:#fff5f8;border-left:4px solid #ff5aa3;"><strong>10:00–10:40</strong> — Expert Talk 1</div>
+            <div class="slot"><strong>10:40–11:20</strong> — Expert Talk 2</div>
+            <div class="slot" style="background:#fffaf0;border-left:4px solid #ffd05a;"><strong>11:20–11:40</strong> — Tea Break</div>
+            <div class="slot"><strong>11:40–12:20</strong> — Expert Talk 3</div>
+            <div class="slot"><strong>12:20–13:00</strong> — Expert Talk 4</div>
+          </div>
 
-  <div class="sponsor-container">
+          <div class="schedule-day">
+            <div class="slot"><strong>13:00–14:00</strong> — Lunch Break</div>
+            <div class="slot"><strong>14:00–16:00</strong> — Workshop 1</div>
+            <div class="slot"><strong>16:00–16:20</strong> — Tea Break</div>
+            <div class="slot"><strong>16:20–18:00</strong> — Project Presentation</div>
+          </div>
+        </div>
 
-    <div class="sponsor-box bronze">
-      Bronze
-      <div class="sponsor-price">₹ 75,000</div>
-    </div>
+        <h3 style="margin-top:18px">Day 2 - 21.02.2026</h3>
+        <div class="schedule-list" style="margin-top:8px">
+          <div class="schedule-day">
+            <div class="slot"><strong>09:30–09:45</strong> — Sponsor Slot 1</div>
+            <div class="slot"><strong>09:45–10:00</strong> — Sponsor Slot 2</div>
+            <div class="slot"><strong>10:00–10:15</strong> — Sponsor Slot 3</div>
+            <div class="slot"><strong>10:15–10:30</strong> — Sponsor Slot 4</div>
+            <div class="slot" style="background:#fffaf0;border-left:4px solid #ffd05a;"><strong>10:30–10:45</strong> — Tea Break</div>
+          </div>
 
-    <div class="sponsor-box silver">
-      Silver
-      <div class="sponsor-price">₹ 1,00,000</div>
-    </div>
+          <div class="schedule-day">
+            <div class="slot"><strong>10:45–13:00</strong> — Competitions (Robo race, Drone race, Project)</div>
+            <div class="slot"><strong>13:00–14:00</strong> — Lunch Break</div>
+            <div class="slot"><strong>14:00–16:00</strong> — Workshop 2</div>
+            <div class="slot"><strong>16:15–17:00</strong> — Valedictory & Prize Distribution</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="sponsor-box gold">
-      Gold
-      <div class="sponsor-price">₹ 2,00,000</div>
-    </div>
+    <section id="Sponsorship" class="section fade-up">
+      <h2>Sponsorship</h2>
+      <p>Choose sponsorship categories and get visibility across events, workshops and digital channels.</p>
 
-    <div class="sponsor-box platinum">
-      Platinum
-      <div class="sponsor-price">₹ 3,00,000</div>
-    </div>
+      <div class="sponsor-grid" style="margin-top:12px">
+        <div class="sponsor-box bronze">
+          Bronze<br><div style="font-size:14px;margin-top:8px">₹ 75,000</div>
+        </div>
+        <div class="sponsor-box silver">
+          Silver<br><div style="font-size:14px;margin-top:8px">₹ 1,00,000</div>
+        </div>
+        <div class="sponsor-box gold">
+          Gold<br><div style="font-size:14px;margin-top:8px">₹ 2,00,000</div>
+        </div>
+        <div class="sponsor-box platinum">
+          Platinum<br><div style="font-size:14px;margin-top:8px">₹ 3,00,000</div>
+        </div>
+      </div>
 
-  </div>
+      <div style="margin-top:18px">
+        <h4>Contact</h4>
+        <p class="small-muted">For details: Mr. Akhilesh Bhatkar — 9420425893 — akhilesh.bhatkar@pilani.bits-pilani.ac.in</p>
+      </div>
+    </section>
 
-  <br><br>
-  <h3>
-    For more details, please contact:<br>
-    Mr. Akhilesh Bhatkar<br>
-    Mob: 9420425893<br>
-    Email: akhilesh.bhatkar@pilani.bits-pilani.ac.in,<br>
-    autownsupport@wilp.bits-pilani.ac.in
-  </h3>
-</section>
-
-<section id="gallery">
+  <section id="gallery" class="section fade-up">
   <h2>Photo Gallery</h2>
 
-  <div class="slider-container">
-    <div class="slider">
-      <img src="images/WILP0054.jpg" alt="Image 1">
-      <img src="images/WILP0059.jpg" alt="Image 2">
-      <img src="images/WILP0186.jpg" alt="Image 3">
-      <img src= "images/WILP0442 (1) (1).jpg" alt="Image 4">
-      <img src="images/WILP0273.jpg" alt="Image 5">
-      <img src="images/WILP0609.jpg" alt="Image 6">
-      <img src="images/WILP0280.jpg" alt="Image 7">
-      <img src="images/WILP0286.jpg" alt="Image 8">
-      <img src="images/WILP0299.jpg" alt="Image 9">
-      <img src="images/WILP0048 (1) (1).jpg" alt="Image 10">
-      <img src="images/WILP0403.jpg" alt="Image 11">
-      <img src="images/WILP0415.jpg" alt="Image 12">
-      <img src="images/WILP0417.jpg" alt="Image 13">
-      <img src="images/WILP0425.jpg" alt="Image 14">
-      <img src="images/WILP0439.jpg" alt="Image 15">
-      <img src="images/WILP0503.jpg" alt="Image 16">
-      <img src="images/WILP0527.jpg" alt="Image 17">
-      <img src="images/WILP0609.jpg" alt="Image 18">
-      <img src="images/WILP0804.jpg" alt="Image 19">
-    </div>
+
+    <div class="slide fade"><img src="images/WILP0054.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0059.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0186.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0442 (1) (1).jpg"></div>
+    <div class="slide fade"><img src="images/WILP0273.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0609.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0280.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0286.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0299.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0048 (1) (1).jpg"></div>
+    <div class="slide fade"><img src="images/WILP0403.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0415.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0417.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0425.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0439.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0503.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0527.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0609.jpg"></div>
+    <div class="slide fade"><img src="images/WILP0804.jpg"></div>
+
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+
   </div>
+
+  <div style="text-align:center; margin-top:12px;">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+
 </section>
 
-<section id="Venue">
-  <h2>Venue</h2>
+    <section id="Venue" class="section fade-up">
+      <h2>Venue</h2>
+      <h3 style="margin-top:6px">BITS Pilani Hyderabad Campus</h3>
+      <p class="small-muted">Shamirpet Mandal, Hyderabad — 500078</p>
 
-  <h3>BITS Pilani Hyderabad Campus. BITS Hyderabad Campus Shamirpeth Mandal 500078.</h3>
-  <h3>Contact: autownsupport@wilp.bits-pilani.ac.in</h3>
+      <div style="margin-top:14px; display:flex; gap:14px; flex-wrap:wrap; align-items:center">
+        <a class="btn" href="https://www.google.com/maps/place/Birla+Institute+of+Technology+%26+Science+Pilani,+Hyderabad+Campus" target="_blank">📍 View on Google Maps</a>
 
-  <div style="text-align: center; margin-top: 20px;">
-  <a href=https://www.google.com/maps/place/Birla+Institute+of+Technology+%26+Science+Pilani,+Hyderabad+Campus/@17.5462878,78.5718489,915m/data=!3m2!1e3!5s0x3bcb9cb2ec082bcf:0x1985b4ad5caaad3b!4m6!3m5!1s0x3bcb83594a86132d:0xc3e06e9e76cebf3d!8m2!3d17.5448888!4d78.571838!16s%2Fm%2F09k5fsf!5m1!1e1?entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D
-     target="_blank"
-     style="
-       display: inline-block;
-       padding: 12px 24px;
-       background: #00e5ff;
-       color: black;
-       font-weight: bold;
-       border-radius: 10px;
-       text-decoration: none;
-       box-shadow: 0 0 15px rgba(0,255,255,0.8);
-       transition: 0.3s;
-     "
-     onmouseover="this.style.transform='scale(1.05)'"
-     onmouseout="this.style.transform='scale(1)'">
-    📍 View on Google Maps
-  </a>
-</div>
-  <div style="margin-top: 30px; display: flex; justify-content: center;">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.4904047792003!2d78.57055267471334!3d17.610819697630097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8521befc2c3b%3A0xaea61bf4b077de6e!2sBITS%20Pilani%2C%20Hyderabad%20Campus!5e0!3m2!1sen!2sin!4v1707917960000!5m2!1sen!2sin"
-      width="80%"
-      height="350"
-      style="border:0; border-radius:15px; box-shadow:0 0 15px rgba(0,255,255,0.4);"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
-</section>
-<footer>
-  © AUTOWN'25 AACE | Designed for the future of smart mobility|
-  Designed & Developed by: Swami Bakal| BITS PILANI WILP| For support: autownsupport@wilp.bits-pilani.ac.in.
-</footer>
+        <div style="flex:1; min-width:280px; display:flex; justify-content:center;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.4904047792003!2d78.57055267471334!3d17.610819697630097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8521befc2c3b%3A0xaea61bf4b077de6e!2sBITS%20Pilani%2C%20Hyderabad%20Campus!5e0!3m2!1sen!2sin!4v1707917960000!5m2!1sen!2sin"
+            width="100%" height="260" style="border:0; border-radius:12px; box-shadow:0 10px 30px rgba(2,6,23,0.06)" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
 
+    <footer>
+      © AUTOWN'25 AACE | Designed for the future of smart mobility | Designed & Developed by: Swami Bakal | For support: autownsupport@wilp.bits-pilani.ac.in
+    </footer>
+  </main>
+
+  
+  <script>
+    (function(){
+      const hamb = document.getElementById('hamb');
+      const navCenter = document.querySelector('.nav-center');
+      let open=false;
+      hamb && hamb.addEventListener('click', ()=>{
+        open = !open;
+        if(open){
+          navCenter.style.display = 'flex';
+          navCenter.style.position = 'absolute';
+          navCenter.style.right = '18px';
+          navCenter.style.top = '76px';
+          navCenter.style.background = 'linear-gradient(180deg,#04112a,#05203e)';
+          navCenter.style.padding = '12px';
+          navCenter.style.borderRadius = '10px';
+          navCenter.style.boxShadow = '0 12px 30px rgba(2,6,23,0.25)';
+          navCenter.style.flexDirection = 'column';
+        } else {
+          navCenter.style.display = '';
+          navCenter.style.position = '';
+        }
+      });
+
+      
+      navCenter && navCenter.addEventListener('click', (e)=>{
+        if(e.target.tagName === 'A' && window.innerWidth <= 1080){
+          navCenter.style.display = '';
+          open=false;
+        }
+      });
+    })();
+
+    (function(){
+      const slider = document.getElementById('gallerySlider');
+      if(!slider) return;
+      let pos = 0;
+      const speed = 3000; //ms
+      const step = () => {
+        pos -= 320; // width + gap approx
+        // reset when scrolled enough
+        const maxScroll = slider.scrollWidth - slider.clientWidth;
+        slider.style.transform = `translateX(${pos}px)`;
+        slider.style.transition = 'transform .9s cubic-bezier(.2,.9,.2,1)';
+        if(Math.abs(pos) >= maxScroll){
+          // smooth reset
+          setTimeout(()=> {
+            slider.style.transition = 'none';
+            pos = 0;
+            slider.style.transform = `translateX(0px)`;
+          }, 1000);
+        }
+      };
+      let autoplay = setInterval(step, speed);
+
+      // pause on hover
+      slider.addEventListener('mouseenter', ()=> clearInterval(autoplay));
+      slider.addEventListener('mouseleave', ()=> autoplay = setInterval(step, speed));
+    })();
+
+    // reveal on scroll
+    (function(){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target) }
+        });
+      }, {threshold:0.12});
+      document.querySelectorAll('.fade-up').forEach(el=> io.observe(el));
+    })();
+
+    (function(){
+      const navHeight = document.querySelector('.top-nav').offsetHeight || 76;
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const targetId = this.getAttribute('href').slice(1);
+          if(!targetId) return;
+          const el = document.getElementById(targetId);
+          if(!el) return;
+          e.preventDefault();
+          const rect = el.getBoundingClientRect();
+          const top = window.pageYOffset + rect.top - navHeight - 12;
+          window.scrollTo({top, behavior:'smooth'});
+        });
+      });
+    })();
+let slideIndex = 0;
+let slideTimer;
+
+function showSlides(n) {
+  let slides = document.getElementsByClassName("slide");
+  let dots = document.getElementsByClassName("dot");
+
+  if (n >= slides.length) slideIndex = 0;
+  if (n < 0) slideIndex = slides.length - 1;
+
+  for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+  for (let i = 0; i < dots.length; i++) dots[i].classList.remove("active");
+
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].classList.add("active");
+
+  slideIndex++;
+
+  // AUTO-PLAY TIMER → **1 second**
+  slideTimer = setTimeout(showSlides, 1000, slideIndex);
+}
+
+// Prev
+document.querySelector(".prev").addEventListener("click", () => {
+  clearTimeout(slideTimer);
+  showSlides(--slideIndex);
+});
+
+// Next
+document.querySelector(".next").addEventListener("click", () => {
+  clearTimeout(slideTimer);
+  showSlides(slideIndex);
+});
+
+// Dots
+Array.from(document.getElementsByClassName("dot")).forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    clearTimeout(slideTimer);
+    slideIndex = index;
+    showSlides(slideIndex);
+  });
+});
+
+showSlides(slideIndex);
+
+
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
