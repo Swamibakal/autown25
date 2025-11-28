@@ -162,12 +162,10 @@
     .img-box:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(2,6,23,0.08)}
 
     .reg-card{border-left:4px solid var(--accent); padding:18px; border-radius:10px; background:linear-gradient(180deg, rgba(240,249,250,0.9), rgba(255,255,255,0.9))}
+    /* Keep all speaker cards in one line */
 .speakers-grid {
-  justify-content: space-between !important;
-}
-
-.speaker {
-  width: 250px;   /* allows 3 in one row */
+  flex-wrap: nowrap !important;
+  justify-content: center;
 }
 
     .speaker img{width:140px; height:140px; border-radius:50%; object-fit:cover; box-shadow:0 8px 20px rgba(2,6,23,0.06)}
@@ -726,6 +724,7 @@ showSlides(slideIndex);
   </script>
 </body>
 </html>
+
 
 
 
