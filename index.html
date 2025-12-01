@@ -100,43 +100,33 @@
     }
     .hamburger span{display:block;width:20px;height:2px;background:#fff;border-radius:2px;box-shadow:0 6px 0 #fff,0 -6px 0 #fff}
 
-  
-    .hero{
-      max-width:var(--container);
-      margin:calc(var(--nav-height) + 36px) auto 24px;
-      padding:48px 28px;
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:28px;
-      align-items:center;
-    }
-    .hero-card{
-      background:var(--card);
-      border-radius:16px;
-      padding:36px;
-      box-shadow:0 10px 30px rgba(2,6,23,0.05);
-    }
-    .hero h1{
-      margin:0;
-      font-size:34px;
-      letter-spacing:0.4px;
-      color:#071332;
-    }
-    .hero .sub{color:var(--muted); margin-top:10px; font-size:16px}
-    .hero .kicker{display:inline-block;background:rgba(0,188,212,0.08); color:var(--accent); padding:6px 10px;border-radius:999px;font-weight:700;margin-bottom:14px}
+  .hero {
+  max-width: var(--container);
+  margin: calc(var(--nav-height) + 36px) auto 24px;
+  padding: 0 28px;
+  display: flex;
+  flex-direction: column; /* STACK INTO COLUMN */
+  gap: 28px;
+}
 
-    .hero-right{
-      background:linear-gradient(180deg, rgba(0,172,191,0.06), rgba(0,172,191,0.03));
-      border-radius:16px;
-      padding:22px;
-      text-align:center;
-      box-shadow: inset 0 -4px 12px rgba(0,0,0,0.03);
-    }
-    .hero-right img{width:100%; height:auto; border-radius:10px; object-fit:cover; margin-bottom:14px}
-    .prize{
-      font-size:30px;color:var(--accent); font-weight:800;
-      margin:0;
-    }
+/* Make the right image card full width */
+.hero-right {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(0,172,191,0.06), rgba(0,172,191,0.03));
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: inset 0 -4px 12px rgba(0,0,0,0.03);
+}
+
+/* Text box becomes full width */
+.hero-card {
+  width: 100%;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.05);
+}
     .small-muted{color:var(--muted); font-size:14px}
 
     .section{
@@ -165,16 +155,25 @@
  
 .speakers-grid {
   display: flex;
-  flex-wrap: nowrap !important;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;   /* KEEP IN ONE LINE */
   gap: 26px;
-  overflow-x: auto;   /* prevents layout break */
+  overflow-x: auto;     /* SCROLLABLE */
+  padding-bottom: 10px;
 }
 
-.speakers-grid::-webkit-scrollbar {
-  height: 6px;
+.speaker {
+  min-width: 240px;
+  max-width: 240px;
+  text-align: center;
 }
 
+.speaker img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+}
 
     .schedule-list{display:flex; gap:18px; flex-wrap:wrap}
     .schedule-day{flex:1; min-width:260px; background:white; padding:14px; border-radius:10px; box-shadow:0 8px 24px rgba(2,6,23,0.04)}
@@ -319,35 +318,41 @@
   </nav>
 
   <main>
-    <section class="hero" id="heading">
-      <div class="hero-card fade-up">
-        <div class="kicker">• AUTOWN'25</div>
-        <h1>AACE</h1>
-        <h1>Autonomous • AI • Cybersecurity • EV</h1>
-        <p class="sub">Powering innovation towards a smarter and safer automotive future. Join experts, competitions, workshops and hands-on labs at BITS Pilani Hyderabad Campus.</p>
+ <section class="hero" id="heading">
 
-        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
-          <a class="btn" href="#events">Register Now</a>
-          <a href="#Venue" style="color:var(--accent); font-weight:700; text-decoration:none; padding:10px 14px; border-radius:10px; background:transparent; border:1px solid rgba(0,172,191,0.06)">View Venue</a>
-        </div>
+  <aside class="hero-right fade-up" aria-labelledby="hero-right-title">
+    <img src="images/aace.jpeg" alt="AUTOWN Logo">
+    <p class="small-muted" style="background:rgba(0,172,191,0.08);padding:8px;border-radius:8px;font-weight:800;color:var(--accent)">
+      Workshops • Competitions • Talks • Networking
+    </p>
+    <div style="margin-top:12px;">
+      <a class="btn" href="https://forms.gle/95nV1nxtQzgY7D7y8" target="_blank">Register as Attendee</a>
+    </div>
+  </aside>
+  <div class="hero-card fade-up">
+    <div class="kicker">• AUTOWN'25</div>
+    <h1>AACE</h1>
+    <h1>Autonomous • AI • Cybersecurity • EV</h1>
+    <p class="sub">Powering innovation towards a smarter and safer automotive future...</p>
 
-        <div style="margin-top:26px; display:flex; gap:18px; align-items:center; flex-wrap:wrap;">
-          <div style="display:flex; gap:10px; align-items:center">
-            <div style="background:rgba(0,172,191,0.08);padding:8px;border-radius:8px;font-weight:800;color:var(--accent)">₹ 3,00,000</div>
-            <div style="color:var(--muted)">Total Prize Money</div>
-          </div>
-          <div style="margin-left:auto; color:var(--muted); font-size:13px">Registration for participants ends on <strong>Feb 1, 2026</strong></div>
-        </div>
+    <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+      <a class="btn" href="#events">Register Now</a>
+      <a href="#Venue" style="color:var(--accent); font-weight:700; text-decoration:none;
+      padding:10px 14px; border-radius:10px; background:transparent; border:1px solid rgba(0,172,191,0.06)">View Venue</a>
+    </div>
+
+    <div style="margin-top:26px; display:flex; gap:18px; align-items:center; flex-wrap:wrap;">
+      <div style="display:flex; gap:10px; align-items:center">
+        <div style="background:rgba(0,172,191,0.08);padding:8px;border-radius:8px;font-weight:800;color:var(--accent)">₹ 3,00,000</div>
+        <div style="color:var(--muted)">Total Prize Money</div>
       </div>
+      <div style="margin-left:auto; color:var(--muted); font-size:13px">
+        Registration for participants ends on <strong>Feb 1, 2026</strong>
+      </div>
+    </div>
+  </div>
 
-      <aside class="hero-right fade-up" aria-labelledby="hero-right-title">
-        <img src="images/aace.jpeg" alt="AUTOWN Logo">
-        <p class="small-muted"style="background:rgba(0,172,191,0.08);padding:8px;border-radius:8px;font-weight:800;color:var(--accent)">Workshops • Competitions • Talks • Networking</p>
-        <div style="margin-top:12px;">
-          <a class="btn" href="https://forms.gle/95nV1nxtQzgY7D7y8" target="_blank">Register as Attendee</a>
-        </div>
-      </aside>
-    </section>
+</section>
 
     <section id="vision" class="section fade-up">
       <div class="two-col">
@@ -439,40 +444,43 @@
       </div>
     </section>
 
-    <section id="speakers" class="section fade-up">
-      <h2>Speakers</h2>
-      <div class="speakers-grid" style="margin-top:18px">
-        <div class="speaker">
-          <img src="images/1.jpeg" alt="Sathyanarayana PVV">
-          <h3 style="margin:12px 0 6px 0">Mr. Sathyanarayana PVV</h3>
-          <div style="font-size:13px; color:var(--muted)">Vice President and Head of R&D, AVTEC Limited</div>
-          <div style="margin-top:10px"><a href="https://www.linkedin.com/in/sathyanarayana-pvv-7b54a5104/" target="_blank" style="color:var(--accent); font-weight:700; text-decoration:none">About Speaker</a></div>
-        </div>
+ <section id="speakers" class="section fade-up">
+  <h2>Speakers</h2>
 
-        <div class="speaker">
-          <img src="images/12.png" alt="Philip Jose">
-          <h3 style="margin:12px 0 6px 0">Mr. Pradeep Chedambadi</h3>
-          <div style="font-size:13px; color:var(--muted)">Senior Technical lead, Bosch Global Software Technologies.</div>
-        </div>
+  <div class="speakers-grid" style="margin-top:18px">
+
+    <div class="speaker">
+      <img src="images/1.jpeg" alt="Sathyanarayana PVV">
+      <h3>Mr. Sathyanarayana PVV</h3>
+      <div style="font-size:13px; color:var(--muted)">
+        Vice President and Head of R&D, AVTEC Limited
       </div>
-      <div class="speaker">
-        <img src="images/Anuj.jpg" alt="Anuj Sharma">
-        <h3 style="margin:12px 0 6px 0">Dr. Anuj Sharma</h3>
-        <div style="font-size:13px; color:var(--muted)">
-          Pitt-Des Moines Professor in Civil Engineering<br>
-          Iowa State University
-        </div>
-        <div style="margin-top:10px"><a href="https://www.engineering.iastate.edu/people/profile/anujs/" target="_blank" style="color:var(--accent); font-weight:700; text-decoration:none">About Speaker</a></div>
+      <div style="margin-top:10px">
+        <a href="https://www.linkedin.com/in/sathyanarayana-pvv-7b54a5104/" target="_blank"
+           style="color:var(--accent); font-weight:700; text-decoration:none">About Speaker</a>
+      </div>
+    </div>
 
-  <div style="margin-top:10px">
-    <a href="https://www.engineering.iastate.edu/people/profile/anujs/" 
-       target="_blank"
-       style="color:var(--accent); font-weight:700; text-decoration:none">
-      Profile Page
-    </a>
+    <div class="speaker">
+      <img src="images/12.png" alt="Philip Jose">
+      <h3>Mr. Pradeep Chedambadi</h3>
+      <div style="font-size:13px; color:var(--muted)">Senior Technical Lead, Bosch GST</div>
+    </div>
+
+    <div class="speaker">
+      <img src="images/Anuj.jpg" alt="Anuj Sharma">
+      <h3>Dr. Anuj Sharma</h3>
+      <div style="font-size:13px; color:var(--muted)">
+        Professor, Iowa State University
+      </div>
+      <div style="margin-top:10px">
+        <a href="https://www.engineering.iastate.edu/people/profile/anujs/" target="_blank"
+           style="color:var(--accent); font-weight:700; text-decoration:none">About Speaker</a>
+      </div>
+    </div>
+
   </div>
-</div>
-    </section>
+</section>
 
     <section id="schedule" class="section fade-up">
       <h2>Schedule</h2>
@@ -730,6 +738,7 @@ showSlides(slideIndex);
   </script>
 </body>
 </html>
+
 
 
 
