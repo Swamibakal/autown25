@@ -165,26 +165,44 @@
 
     .reg-card{border-left:4px solid var(--accent); padding:18px; border-radius:10px; background:linear-gradient(180deg, rgba(240,249,250,0.9), rgba(255,255,255,0.9))}
  
+/* --- SPEAKERS SECTION OPTIMIZED --- */
+
 .speakers-grid {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;   /* KEEP IN ONE LINE */
-  gap: 26px;
-  overflow-x: auto;     /* SCROLLABLE */
-  padding-bottom: 10px;
+  flex-wrap: nowrap;        /* force one-line layout */
+  gap: 32px;
+  overflow-x: auto;         /* enable smooth horizontal scroll */
+  padding: 10px 4px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) #e2e8f0;
+}
+
+.speakers-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.speakers-grid::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+.speakers-grid::-webkit-scrollbar-track {
+  background: #e2e8f0;
 }
 
 .speaker {
-  min-width: 240px;
-  max-width: 240px;
+  flex: 0 0 260px;          /* fixed width box */
   text-align: center;
+  background: #fff;
+  padding: 14px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
 }
 
 .speaker img {
   width: 100%;
-  height: 240px;
+  height: 260px;
+  border-radius: 14px;
   object-fit: cover;
-  border-radius: 12px;
 }
 
     .schedule-list{display:flex; gap:18px; flex-wrap:wrap}
@@ -435,33 +453,37 @@
       </div>
     </section>
 
- <section id="speakers" class="section fade-up">
+<section id="speakers" class="section fade-up">
   <h2>Speakers</h2>
 
-  <div class="speakers-grid" style="margin-top:18px">
+  <div class="speakers-grid">
 
     <div class="speaker">
       <img src="images/1.jpeg" alt="Sathyanarayana PVV">
-      <h3><a href="https://www.linkedin.com/in/sathyanarayana-pvv-7b54a5104/" target="_blank"
-           style="color:var(--accent); font-weight:700; text-decoration:none">Mr. Sathyanarayana PVV</a></h3>
+      <h3><a href="https://www.linkedin.com/in/sathyanarayana-pvv-7b54a5104/"
+             target="_blank" style="color:var(--accent); font-weight:700; text-decoration:none">
+          Mr. Sathyanarayana PVV
+      </a></h3>
       <div style="font-size:13px; color:var(--muted)">
         Vice President and Head of R&D, AVTEC Limited
       </div>
-    
+    </div>
+
     <div class="speaker">
-      <img src="images/12.png" alt="Philip Jose">
+      <img src="images/12.png" alt="Pradeep Chedambadi">
       <h3>Mr. Pradeep Chedambadi</h3>
       <div style="font-size:13px; color:var(--muted)">Senior Technical Lead, Bosch GST</div>
     </div>
 
     <div class="speaker">
       <img src="images/Anuj.jpg" alt="Anuj Sharma">
-      <h3> <a href="https://www.engineering.iastate.edu/people/profile/anujs/" target="_blank"
-           style="color:var(--accent); font-weight:700; text-decoration:none">Dr. Anuj Sharma</a></h3>
-      <div style="font-size:13px; color:var(--muted)">
-        Professor, Iowa State University
-      </div>
-
+      <h3>
+        <a href="https://www.engineering.iastate.edu/people/profile/anujs/" target="_blank"
+           style="color:var(--accent); font-weight:700; text-decoration:none">
+           Dr. Anuj Sharma
+        </a>
+      </h3>
+      <div style="font-size:13px; color:var(--muted)">Professor, Iowa State University</div>
     </div>
 
   </div>
@@ -709,4 +731,5 @@ showSlides(slideIndex);
   </script>
 </body>
 </html>
+
 
