@@ -252,7 +252,29 @@
   from {opacity: 0.3}
   to {opacity: 1}
 }
-
+.prev, .next { 
+  cursor: pointer; 
+  position: absolute;
+  top: 50%; 
+  width: auto; 
+  padding: 16px; 
+  margin-top: -30px;
+  color: white; 
+  font-weight: bold; 
+  font-size: 28px; 
+  transition: 0.3s ease; 
+  user-select: none; 
+  border-radius: 0 6px 6px 0; 
+  background: rgba(0,0,0,0.35);
+}
+  .next { 
+    right: 0; 
+    border-radius: 6px 0 0 6px;
+  }
+  .prev:hover, 
+  .next:hover { 
+    background: rgba(0,0,0,0.55);
+  }
 /* Dots */
 .dot {
   cursor: pointer;
